@@ -1,27 +1,15 @@
-/*---------------------------------------------------------------------------------
-
-	$Id: main.cpp,v 1.13 2008-12-02 20:21:20 dovoto Exp $
-
-	Simple console print demo
-	-- dovoto
-
-
----------------------------------------------------------------------------------*/
 #include <nds.h>
-
 #include <stdio.h>
 
 volatile int frame = 0;
 
-//---------------------------------------------------------------------------------
-void Vblank() {
-//---------------------------------------------------------------------------------
+void Vblank()
+{
 	frame++;
 }
 
-//---------------------------------------------------------------------------------
-int main(void) {
-//---------------------------------------------------------------------------------
+int main(void)
+{
 	touchPosition touchXY;
 
 	irqSet(IRQ_VBLANK, Vblank);
@@ -32,8 +20,8 @@ int main(void) {
 	iprintf("     \x1b[32mwww.devkitpro.org\n");
 	iprintf("   \x1b[32;1mwww.drunkencoders.com\x1b[39m");
 
-	while(1) {
-
+	while(1)
+	{
 		swiWaitForVBlank();
 		touchRead(&touchXY);
 
