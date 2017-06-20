@@ -1,36 +1,22 @@
 #include <nds.h>
 #include <stdio.h>
 
-volatile int frame = 0;
-
-void Vblank()
-{
-	frame++;
-}
-
 int main(void)
 {
-	touchPosition touchXY;
+    consoleDemoInit();
 
-	irqSet(IRQ_VBLANK, Vblank);
+    iprintf("PONG");
 
-	consoleDemoInit();
+    while(1)
+    {
+        swiWaitForVBlank();
 
-	iprintf("      Hello DS dev'rs\n");
-	iprintf("     \x1b[32mwww.devkitpro.org\n");
-	iprintf("   \x1b[32;1mwww.drunkencoders.com\x1b[39m");
+        scanKeys();
 
-	while(1)
-	{
-		swiWaitForVBlank();
-		touchRead(&touchXY);
-
-		// print at using ansi escape sequence \x1b[line;columnH
-		iprintf("\x1b[10;0HFrame = %d",frame);
-		iprintf("\x1b[16;0HTouch x = %04X, %04X\n", touchXY.rawx, touchXY.px);
-		iprintf("Touch y = %04X, %04X\n", touchXY.rawy, touchXY.py);
-
-	}
-
-	return 0;
+        int pressed = keysDown();
+        if(pressed & KEY_START)
+        {
+            break;
+        }
+    }
 }
