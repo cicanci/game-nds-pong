@@ -24,7 +24,7 @@ BUILD    := build
 SOURCES  := source
 INCLUDES := include
 DATA     :=
-GRAPHICS :=
+GRAPHICS := data
 AUDIO    :=
 ICON     :=
 
@@ -33,9 +33,9 @@ ICON     :=
 NITRO    :=
 
 # These set the information text in the nds file
-GAME_TITLE     := Advanced ARM9 template
-GAME_SUBTITLE1 := built with devkitARM
-GAME_SUBTITLE2 := http://devitpro.org
+GAME_TITLE     := PONG
+GAME_SUBTITLE1 := by Bruno Cicanci
+GAME_SUBTITLE2 := http://cicanci.com
 
 #---------------------------------------------------------------------------------
 # options for code generation
