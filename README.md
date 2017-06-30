@@ -14,7 +14,7 @@ Pong using [devkitPro](https://devkitpro.org/) for Nintendo DS.
 
 [libnds documentation](http://libnds.devkitpro.org/)
 
-[Xcode setup for devkitPro](http://wiibrew.org/wiki/Devkitppc_setup_(Mac_OS_X)
+[Xcode setup for devkitPro](http://wiibrew.org/wiki/Devkitppc_setup_(Mac_OS_X))
 
 [NDS Homebrew VRAM Banks Selector](https://mtheall.com/banks.html)
 
