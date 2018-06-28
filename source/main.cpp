@@ -12,14 +12,16 @@
 unsigned char** newUniv = NULL;
 
 void show(unsigned char** univ, int w, int h) {
-    system("clear");
+    //system("clear");
     //printf("\033[H");
+    iprintf("\x1b[2J");
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
             //printf(univ[y][x] ? "\033[07m  \033[m" : "  ");
-            printf(univ[y][x] ? "0" : "  ");
+            printf(univ[y][x] ? "0" : " ");
         }
         //printf("\033[E");
+        printf("\n");
     }
     fflush(stdout);
 }
@@ -48,7 +50,7 @@ void evolve(unsigned char ** univ, int w, int h) {
             for (int y1 = y - 1; y1 <= y + 1; y1++) {
                 for (int x1 = x - 1; x1 <= x + 1; x1++) {
                     // Any cell outside the bounding box is considered to be dead.
-                    if (univ[(y1 + h) % h][(x1 + w) % w]) {
+                    if (x1 >= 0 && x1 < w && y1 >= 0 && y1 < h && univ[(y1 + h) % h][(x1 + w) % w]) {
                         n++;
                     }
                 }
@@ -86,7 +88,7 @@ void game(int w, int h, unsigned char** univ, int cycles, int print_result, int 
     if (1 == print_result) {
         show(univ, w, h);
     }
-    printf("Simulation completed after %d cycles.\n\n", cycles);
+    //printf("Simulation completed after %d cycles.\n\n", cycles);
 }
 
 unsigned char** random_univ(int w, int h) {
@@ -222,11 +224,13 @@ int main(void) {
 //    iprintf("\twww.drunkencoders.com\n");
 //    iprintf("\twww.devkitpro.org");
     
-    consoleSelect(&bottomScreen);
+    int w = 30;
+    int h = 20;
+    int time = 5;
+    int cycles = 100;
+    game(w, h, random_univ(w, h), cycles, 1, time);
     
-    int w = 10;
-    int h = 10;
-    game(w, h, random_univ(w, h), 100, 1, 1);
+    consoleSelect(&bottomScreen);
     
     while(1) {
         
@@ -234,6 +238,12 @@ int main(void) {
         
         //printf("\x1b[10;0HTouch x = %04i, %04i\n", touch.rawx, touch.px);
         //iprintf("Touch y = %04i, %04i\n", touch.rawy, touch.py);
+        
+        if(touch.px > 0) {
+            consoleSelect(&topScreen);
+            game(w, h, random_univ(w, h), cycles, 1, time);
+            consoleSelect(&bottomScreen);
+        }
         
         swiWaitForVBlank();
         scanKeys();
