@@ -224,8 +224,8 @@ int main(void) {
 //    iprintf("\twww.drunkencoders.com\n");
 //    iprintf("\twww.devkitpro.org");
     
-    int w = 30;
-    int h = 20;
+    int w = 31;
+    int h = 23;
     int time = 5;
     int cycles = 100;
     game(w, h, random_univ(w, h), cycles, 1, time);
